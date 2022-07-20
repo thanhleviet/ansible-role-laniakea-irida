@@ -4,8 +4,8 @@
   file:
     path: "{{ item }}"
     state: directory
-    owner: tomcat8
-    group: tomcat8
+    owner: tomcat
+    group: tomcat
   with_items:
     #- "{{ irida_dir }}"
     - "{{ irida_data }}"
@@ -16,6 +16,11 @@
     - "{{ irida_assembly }}" 
     - "{{ irida_snapshot }}"
 
+- name: Create tomcat9 service directory
+  file:
+    path: "{{ tomcat_service_d }}"
+    state: directory
+
 - name: Create /etc/irida file tree
   file:
     path: "{{ item }}"
@@ -23,6 +28,11 @@
   with_items:
     - "{{ irida_conf_dir }}"
     - "{{ irida_analytics }}"
+
+- name: Copy override.conf for tomcat9 service directory
+  template:
+    dest: "{{ tomcat_service_d }}/override.conf"
+    src: override.conf.j2
 
 - name: Edit irida.conf and web.conf files
   template:

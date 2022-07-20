@@ -35,6 +35,11 @@
     state: restarted
     enabled: yes
 
+- name: Drop the irida database
+  mysql_db:
+    name: "irida"
+    state: absent
+
 - name: Grant privileges on irida db to irida user
   mysql_user:
     name: "irida"

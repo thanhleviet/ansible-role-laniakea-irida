@@ -2,7 +2,7 @@
 - name: Install Irida and Galaxy on the same host
   set_fact:
     type_of_node: 'all'
-  when: irida_server_ip == galaxy_wn_ip
+  when: irida_server_ip == galaxy_wn_ip and type_of_node == 'all'
 
 - include_tasks: galaxy_docker.yml
   when: type_of_node == 'galaxy' or

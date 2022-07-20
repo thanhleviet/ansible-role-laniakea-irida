@@ -8,10 +8,11 @@
   apt:
     name:
       - openjdk-11-jdk
-      - tomcat8
+      - tomcat9
       - libtcnative-1
       - mariadb-server
       - python3-mysqldb
+      - fastqc
     state: present
 
 # Create IRIDA file trees and create config files
@@ -20,24 +21,24 @@
 # Grant privileges and create database
 - include_tasks: irida_database.yml
 
-- name: Set environment variables for tomcat8 Servlet container
+- name: Set environment variables for tomcat9 Servlet container
   template:
     dest: "{{ tomcat_conf_file }}"
-    src: tomcat8.j2
+    src: tomcat9.j2
 
-- name: Set environment variables for tomcat8 in setenv.sh
+- name: Set environment variables for tomcat9 in setenv.sh
   template:
-    dest: /usr/share/tomcat8/bin/setenv.sh
+    dest: /usr/share/tomcat9/bin/setenv.sh
     src: setenv.sh
 
-- name: Edit server.xml file for tomcat8
+- name: Edit server.xml file for tomcat9
   template:
-    dest: /etc/tomcat8/server.xml
+    dest: /etc/tomcat9/server.xml
     src: server.xml.j2
 
-- name: Restart tomcat8
+- name: Restart tomcat9
   service:
-    name: tomcat8
+    name: tomcat9
     state: restarted
     enabled: yes
 
@@ -45,8 +46,8 @@
   get_url:
     url: "{{ irida_war_url }}"
     dest: "{{ tomcat_webapps }}/irida.war"
-    owner: tomcat8
-    group: tomcat8
+    owner: tomcat
+    group: tomcat
 
 - include_tasks: nginx.yml
 

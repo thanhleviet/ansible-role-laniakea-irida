@@ -48,6 +48,11 @@ irida_nfs_dir: "{{ nfs_root }}/irida"
 ## irida.conf file variables
 irida_conf_url: "https://phac-nml.github.io/irida-documentation/administrator/web/config/irida.conf"
 
+<<<<<<< HEAD
+=======
+irida_version: 22.05.5
+
+>>>>>>> fix permission btw tomcat9 and debian based distro
 irida_conf_params:
   # Directories to store files managed by IRIDA
   sequence_file_base_directory: "{{ irida_sequencing }}"
@@ -94,15 +99,18 @@ irida_password: irida01
 
 
 ## Tomcat8 variables
-tomcat_conf_file: "/etc/default/tomcat8"
+
+tomcat_conf_file: "/etc/default/tomcat9"
+
+tomcat_service_d: "/etc/systemd/system/tomcat9.service.d"
 
 tomcat_conf_params:
   JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64/"
   JAVA_OPTS: "-Dspring.profiles.active=prod -Dirida.db.profile=prod -Djava.awt.headless=true -XX:+UseConcMarkSweepGC -Xms1024m -Xmx1024m -XX:+UseConcMarkSweepGC"
 
-irida_war_url: "https://github.com/phac-nml/irida/releases/download/22.01.1/irida-22.01.1.war"
+irida_war_url: "https://github.com/phac-nml/irida/releases/download/{{ irida_version }}/irida-{{ irida_version }}.war"
 
-tomcat_webapps: "/var/lib/tomcat8/webapps"
+tomcat_webapps: "/var/lib/tomcat9/webapps"
 
 # nginx variables
 client_max_body_size: 0
