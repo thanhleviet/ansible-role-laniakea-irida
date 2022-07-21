@@ -48,11 +48,8 @@ irida_nfs_dir: "{{ nfs_root }}/irida"
 ## irida.conf file variables
 irida_conf_url: "https://phac-nml.github.io/irida-documentation/administrator/web/config/irida.conf"
 
-<<<<<<< HEAD
-=======
 irida_version: 22.05.5
 
->>>>>>> fix permission btw tomcat9 and debian based distro
 irida_conf_params:
   # Directories to store files managed by IRIDA
   sequence_file_base_directory: "{{ irida_sequencing }}"
